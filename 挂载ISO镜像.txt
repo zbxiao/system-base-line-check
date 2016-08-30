@@ -1,0 +1,19 @@
+挂载ISO镜像：
+
+mount -o loop /home/admin/rhel6.1.iso /mnt/
+
+配置YUM：
+
+cat<<\EOF >/etc/yum.repos.d/cdrom.repo 
+[cdrom]
+name=cdrom
+#baseurl=ftp://ftp.redhat.com/pub/redhat/linux/enterprise/$releasever/en/os/SRPMS/
+baseurl=file:///mnt/Server/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+EOF
+
+安装开发工具：
+
+yum groupinstall 'Development tools' -y
